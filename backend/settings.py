@@ -78,11 +78,14 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'backend.asgi.application'
 
+
+REDIS_URL = 'rediss://red-cuagigtsvqrc73doni7g:D2Qc2hvyjF3yOG49tdWRMT8D4C8yff3P@oregon-redis.render.com:6379'
+# For development (in-memory channel layer)
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [('localhost', 6379)],
+            "hosts": [REDIS_URL],
         },
     },
 }
