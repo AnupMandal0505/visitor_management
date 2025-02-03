@@ -1,10 +1,30 @@
+version: "3.8"
+
 services:
   web:
     build: .
+    container_name: django
     ports:
-      - "8000:8000"
+      - "8000:8000"  # Expose port 8000 on host to port 8000 inside the container
     volumes:
       - .:/visitor_management
-
     environment:
       - DEBUG=True
+      - REDIS_URL=redis://redis:6379  # Use Redis from Docker container
+      - ASGI_APPLICATION=backend.asgi.application  # Assuming this is your ASGI app for Channels
+    depends_on:
+      - redis
+    networks:
+      - visitor_management_network
+
+  redis:
+    image: redis:alpine
+    container_name: redis
+    ports:
+      - "6379:6379"  # Expose Redis on port 6379
+    networks:
+      - visitor_management_network
+
+networks:
+  visitor_management_network:
+    driver: bridge
