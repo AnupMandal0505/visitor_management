@@ -107,10 +107,6 @@ ASGI_APPLICATION = 'backend.asgi.application'
 REDIS_HOST = os.getenv("REDIS_HOST", "redis")  # Docker container name
 REDIS_PORT = os.getenv("REDIS_PORT", "6379")
 
-# ---------------------------
-# 🚀 Django Channels & WebSockets
-# ---------------------------
-
 
 
 WSGI_APPLICATION = 'backend.wsgi.application'
