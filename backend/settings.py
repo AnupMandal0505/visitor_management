@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'demo',
     'authuser',
     'appointment',
+    'daphne',
 ]
 
 MIDDLEWARE = [
