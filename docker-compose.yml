@@ -6,15 +6,13 @@ services:
     container_name: django
     ports:
       - "8000:8000"
-    volumes:
-      - .:/app
     environment:
       - DEBUG=True
-      - REDIS_HOST=redis  # Docker container hostname
+      - REDIS_HOST=redis
       - REDIS_PORT=6379
     depends_on:
       redis:
-        condition: service_healthy  # Ensure Redis is ready before Django starts
+        condition: service_healthy
     networks:
       - visitor_management_network
 
