@@ -5,25 +5,30 @@ services:
     build: .
     container_name: django
     ports:
-      - "8000:8000"  # Expose port 8000 on host to port 8000 inside the container
+      - "8000:8000"
     volumes:
-      - .:/visitor_management
+      - .:/app
     environment:
       - DEBUG=True
-      - REDIS_URL=redis://redis:6379  # Use Redis from Docker container
-      - ASGI_APPLICATION=backend.asgi.application  # Assuming this is your ASGI app for Channels
+      - REDIS_HOST=redis  # Docker container hostname
+      - REDIS_PORT=6379
     depends_on:
-      - redis
+      redis:
+        condition: service_healthy  # Ensure Redis is ready before Django starts
     networks:
       - visitor_management_network
 
   redis:
     image: redis:alpine
     container_name: redis
-    ports:
-      - "6379:6379"  # Expose Redis on port 6379
+    restart: always
     networks:
       - visitor_management_network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      retries: 5
+      timeout: 3s
 
 networks:
   visitor_management_network:

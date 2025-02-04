@@ -93,16 +93,33 @@ ASGI_APPLICATION = 'backend.asgi.application'
 
 
 # Fetch the Redis URL from environment variable, with a fallback to localhost in development
-REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+# REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
+# REDIS_URL='redis://red-cuagigtsvqrc73doni7g:6379'
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [REDIS_URL],
+#         },
+#     },
+# }
+
+REDIS_HOST = os.getenv("REDIS_HOST", "redis")  # Docker container name
+REDIS_PORT = os.getenv("REDIS_PORT", "6379")
+
+# ---------------------------
+# 🚀 Django Channels & WebSockets
+# ---------------------------
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [REDIS_URL],
+            "hosts": [(REDIS_HOST, int(REDIS_PORT))],  # Correct Redis URL
         },
     },
 }
+
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
