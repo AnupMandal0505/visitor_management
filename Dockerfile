@@ -6,7 +6,7 @@ FROM python:3.11-slim-buster
 RUN apt-get update && apt-get install -y git
 
 # Set the working directory in the container
-WORKDIR /visitor_management
+WORKDIR /app
 
 # Copy requirements.txt and install dependencies
 COPY requirements.txt requirements.txt
@@ -21,4 +21,4 @@ EXPOSE 8000
 
 
 # Run the Django development server
-CMD daphne backend.asgi:application
+CMD python manage.py runserver 0.0.0.0:8000

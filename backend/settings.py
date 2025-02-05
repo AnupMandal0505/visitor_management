@@ -9,7 +9,6 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-import os
 
 from pathlib import Path
 
@@ -27,11 +26,8 @@ SECRET_KEY = '&d^fpv_!@=6^s-fc9yvne3s8^o)(coeq&irw)xyoeeiu9qq0pv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+ALLOWED_HOSTS = ['https://visitor-management-ai9g.onrender.com']
 
-ALLOWED_HOSTS = ['visitor-management-ai9g.onrender.com', '127.0.0.1', 'localhost']
-
-# settings.py
-DOMAIN_NAME = 'https://visitor-management-ai9g.onrender.com'
 
 # Application definition
 
@@ -47,7 +43,6 @@ INSTALLED_APPS = [
     'demo',
     'authuser',
     'appointment',
-    'daphne',
 ]
 
 MIDDLEWARE = [
@@ -80,47 +75,11 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'backend.asgi.application'
 
-
-# REDIS_URL = 'rediss://red-cuagigtsvqrc73doni7g:D2Qc2hvyjF3yOG49tdWRMT8D4C8yff3P@oregon-redis.render.com:6379'
-# # For development (in-memory channel layer)
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [REDIS_URL],
-#         },
-#     },
-# }
-
-
-# Fetch the Redis URL from environment variable, with a fallback to localhost in development
-# REDIS_URL = os.getenv('REDIS_URL', 'redis://localhost:6379')
-# REDIS_URL='redis://red-cuagigtsvqrc73doni7g:6379'
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [REDIS_URL],
-#         },
-#     },
-# }
-
-REDIS_HOST = os.getenv("REDIS_HOST", "redis")  # Docker container name
-REDIS_PORT = os.getenv("REDIS_PORT", "6379")
-
-
-
-WSGI_APPLICATION = 'backend.wsgi.application'
-# Add Channels configuration
-ASGI_APPLICATION = 'backend.asgi.application'
-
-REDIS_URL = 'rediss://red-cuagigtsvqrc73doni7g:D2Qc2hvyjF3yOG49tdWRMT8D4C8yff3P@oregon-redis.render.com:6379'
-# For development (in-memory channel layer)
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [REDIS_URL],
+            "hosts": [('chanl', 6379)],
         },
     },
 }
