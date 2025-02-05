@@ -76,11 +76,23 @@ TEMPLATES = [
 
 ASGI_APPLICATION = 'backend.asgi.application'
 
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [('chanl', 6379)],
+#         },
+#     },
+# }
+
+
+import os
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [('chanl', 6379)],
+            "hosts": ["redis://red-cuagigtsvqrc73doni7g:6379"],  # Use Render Redis URL
         },
     },
 }
