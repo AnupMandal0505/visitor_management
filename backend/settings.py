@@ -26,7 +26,8 @@ SECRET_KEY = '&d^fpv_!@=6^s-fc9yvne3s8^o)(coeq&irw)xyoeeiu9qq0pv'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://visitor-management-ai9g.onrender.com']
+# ALLOWED_HOSTS = ['https://visitor-management-ai9g.onrender.com']
+ALLOWED_HOSTS = ['visitor-management-ai9g.onrender.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
